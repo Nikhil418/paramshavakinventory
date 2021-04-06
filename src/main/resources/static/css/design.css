@@ -1,0 +1,28 @@
+p{
+	color: rgb(0, 128, 192);
+	
+}
+.msg{
+	color: red;
+	font: 100
+}
+.addnew{
+	color: black;
+background-color: #FFC312;
+width: 200px;
+align-content:center;
+}
+.addnew:hover{
+	color: black;
+background-color: black;
+}
+.addmachine{
+	width: 200px;
+    align-content:center;
+    margin:auto;
+}
+.addgpu{
+	width: 200px;
+    align-content:center;
+    margin:auto;
+}
