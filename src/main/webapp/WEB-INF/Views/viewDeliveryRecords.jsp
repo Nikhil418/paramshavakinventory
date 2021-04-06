@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 <div class="m-3">
 	<h3 align="center"> Delivery Records</h3>
 	<table class="table table-striped table-bordered">
