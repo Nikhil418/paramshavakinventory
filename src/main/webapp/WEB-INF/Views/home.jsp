@@ -9,6 +9,7 @@
 </head>
 <body align="center">
 	<h3>Welcome to PARAM Shavak Inventory</h3>
+	<jsp:include page="header.jsp"/>
 	<div class="m-3">
 		<a href="/addnew" class="btn btn-warning" type="button" name="add">Add New</a>
 		<a href="/viewAll" class="btn btn-success" type="button" name="viewall">View Records</a>

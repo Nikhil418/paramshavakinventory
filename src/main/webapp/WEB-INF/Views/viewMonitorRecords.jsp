@@ -11,22 +11,18 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="m-3">
-	<h3 align="center"> Machine Records</h3>
+	<h3 align="center"> Monitor Records</h3>
 	<table class="table table-striped table-bordered">
 	<thead>
 	<tr>
 	<th>Manufacturer</th>
-	<th>Machine Model</th>
-	<th>Machine Sr. No.</th>
+	<th>Monitor Model</th>
+	<th>Monitor Sr. No.</th>
 	<th>Issued on Date</th>
 	<th>Issued on Name</th>
-	<th>GPU Card</th>
-	<th>GPU Card Sr No.</th>
 	<th>Mobile No.</th>
 	<th>Status</th>
 	<th>Action</th>
-	
-	
 	
 	</tr>
 	</thead>
@@ -34,17 +30,15 @@
 	<c:forEach var="s" items="${vlist }">
 	<tr>
 	<td>${s.manufacturer }</td>
-	<td>${s.machineModel }</td>
+	<td>${s.monitorModel }</td>
 	<td>${s.serialNo }</td>
 	<td>${s.issuedOnDate }</td>
 	<td>${s.issuedOnName }</td>
-	<td>${s.gpuCard }</td>
-	<td>${s.gpuCardSerialNumber }</td>
 	<td>${s.mobile }</td>
 	<td>${s.status }</td>
 	<td>
-		<a href="update/${s.mid}" class="btn btn-warning ml-4 float-right">Update</a>
-		<a href="delete/${s.mid}" class="btn btn-danger ml-4 float-right">Delete</a>
+		<a href="update/${s.moid}" class="btn btn-warning ml-4 float-right">Update</a>
+		<a href="delete/${s.moid}" class="btn btn-danger ml-4 float-right">Delete</a>
 	</td>
 	
 	</tr>

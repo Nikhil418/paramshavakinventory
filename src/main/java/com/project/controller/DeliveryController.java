@@ -1,60 +1,161 @@
 package com.project.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.google.gson.Gson;
 import com.project.dao.DeliveryDao;
 import com.project.dao.GPUCardDao;
 import com.project.dao.MachineDao;
+import com.project.dao.MonitorDao;
 import com.project.model.Delivery;
 import com.project.model.DeliveryCount;
 import com.project.model.GPUCard;
 import com.project.model.Machine;
+import com.project.model.Monitor;
 
 @Controller
+@RequestMapping("/delivery")
 public class DeliveryController {
 
 	@Autowired
 	MachineDao machineDao;
+	
+	@Autowired
+	MonitorDao monitorDao;
+	
 	@Autowired
 	DeliveryDao deliveryDao;
 
 	@Autowired
 	GPUCardDao gpuCardDao;
 
-	@RequestMapping("/addDelivery")
-	public ModelAndView addDelivery() {
-		List<String> mlist = machineDao.getbyMachineManufacture();
-		System.out.println(mlist);
-		return new ModelAndView("addDelivery", "mlist", mlist);
+	@GetMapping("/add")
+	public ModelAndView showDeliveryPage() {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("machineList", machineDao.getAvailablebyMachineManufacturer());
+		map.put("monitorList", monitorDao.getAvailablebyMonitorManufacturer());
+		map.put("record", new Delivery());
+		return new ModelAndView("addDelivery", "map", map);
+	}
+	
+	@PostMapping("/add/{id}")
+	public ModelAndView addDeliveryDetails(Delivery delivery, @PathVariable int id) {
+		if (deliveryDao.findById(id).isPresent())
+			delivery.setDid(id);
+		deliveryDao.save(delivery);
+		try {
+			Machine machine=machineDao.findAllBySerialNo(delivery.getMachineSerialNo()).get(0);
+			machine.setStatus("Dispatch");
+			
+			Monitor monitor=monitorDao.findAllBySerialNo(delivery.getMonitorSerialNo()).get(0);
+			monitor.setStatus("Dispatch");
+			
+			GPUCard gcard=gpuCardDao.findAllByGPUSerialno(delivery.getGpuCardSerialNo()).get(0);
+			gcard.setStatus("Dispatch");
+			
+			machineDao.save(machine);
+			gpuCardDao.save(gcard);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return new ModelAndView("redirect:/delivery/view");
+	}
+
+	@RequestMapping("/view")
+	public ModelAndView viewDetails() {
+		List<Delivery> vlist = deliveryDao.findAll();
+		return new ModelAndView("viewDeliveryRecords", "vlist", vlist);
+	}
+	
+	@GetMapping("/update/{id}")
+	public ModelAndView updateDeliveryDetails(@PathVariable int id) {
+		Optional<Delivery> foundRecord = deliveryDao.findById(id);
+		Delivery delivery = new Delivery();
+		if (foundRecord.isPresent()) 
+			delivery = foundRecord.get();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("mlist", machineDao.getAvailablebyMachineManufacturer());
+		map.put("record", delivery);
+		return new ModelAndView("updateDelivery","map",map);
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public ModelAndView deleteDeliveryDetails(@PathVariable int id) {
+		Optional<Delivery> foundRecord = deliveryDao.findById(id);
+		if (foundRecord.isPresent()) {			
+			Delivery delivery = foundRecord.get();
+			deliveryDao.delete(delivery);
+			try {
+				Machine machine = machineDao.findAllBySerialNo(delivery.getMachineSerialNo()).get(0);
+				machine.setStatus("Available");
+				
+				Monitor monitor = monitorDao.findAllBySerialNo(delivery.getMonitorSerialNo()).get(0);
+				monitor.setStatus("Available");
+				
+				GPUCard gcard=gpuCardDao.findAllByGPUSerialno(delivery.getGpuCardSerialNo()).get(0);
+				gcard.setStatus("Available");
+				
+				machineDao.save(machine);
+				gpuCardDao.save(gcard);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		return new ModelAndView("redirect:/delivery/view");
+	}
+	
+	@ResponseBody
+	@GetMapping("loadmachinemanufacture")
+	public String loadMachineManufacture() {
+		Gson gson = new Gson();
+		return gson.toJson(machineDao.getAvailablebyMachineManufacturer());
+	}
+	
+	@ResponseBody
+	@GetMapping("loadmonitormanufacture")
+	public String loadMonitorManufacture() {
+		Gson gson = new Gson();
+		return gson.toJson(monitorDao.getAvailablebyMonitorManufacturer());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "loadmachinemodelbymanufacture/{mfg}", method = RequestMethod.GET)
+	public String loadMachineModelByManufacture(@PathVariable("mfg") String mfg) {
+		Gson gson = new Gson();
+		return gson.toJson(machineDao.findAvailableByManufacturer(mfg));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "loadmonitormodelbymanufacture/{mfg}", method = RequestMethod.GET)
+	public String loadMonitorModelByManufacture(@PathVariable("mfg") String mfg) {
+		Gson gson = new Gson();
+		return gson.toJson(monitorDao.findAvailableByManufacturer(mfg));
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "loadmodelbymanufacture/{mfg}", method = RequestMethod.GET)
-	public String loadModelByManufacture(@PathVariable("mfg") String mfg) {
+	@RequestMapping(value = "loadmachineserialnobymodel/{model}", method = RequestMethod.GET)
+	public String loadMachineSerailNoByModel(@PathVariable("model") String model) {
 		Gson gson = new Gson();
-		return gson.toJson(machineDao.findByManufacture(mfg));
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "loadserialnobymodel/{model}", method = RequestMethod.GET)
-	public String loadSerailNoByModel(@PathVariable("model") String model) {
-		Gson gson = new Gson();
-		System.out.println("Model : " + model);
 		return gson.toJson(machineDao.findSerialNoByModel(model));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "loadmonitorserialnobymodel/{model}", method = RequestMethod.GET)
+	public String loadMonitorSerailNoByModel(@PathVariable("model") String model) {
+		Gson gson = new Gson();
+		return gson.toJson(monitorDao.findSerialNoByModel(model));
 	}
 
 	@ResponseBody
@@ -70,103 +171,14 @@ public class DeliveryController {
 	public String loadGpuSerialNoByCard(@PathVariable("gpucard") String gpuCard) {
 		Gson gson = new Gson();
 		System.out.println("GPC Card : " + gpuCard);
-		return gson.toJson(gpuCardDao.findGpuCardSerialNumberByCard(gpuCard));
+		return gson.toJson(gpuCardDao.findAvailableGpuCardSerialNumberByCard(gpuCard));
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "loadinbuiltgpucard/{srno}", method = RequestMethod.GET)
 	public String loadBuiltInGpuCard(@PathVariable("srno") String srno) {
 		Gson gson = new Gson();
-		return gson.toJson(machineDao.findBySerialNo(srno).get(0).getGpu_card());
-	}
-
-	@RequestMapping("/adddeliverydetails")
-	public ModelAndView addDeliveryDetails(@RequestParam("paramshavakvarient") String paramshavakvarient, @RequestParam("manufacture") String manufacture,
-			@RequestParam("machinemodel") String machinemodel, @RequestParam("serialno") String serialno,
-			@RequestParam("dispatch_date") String dispatch_date, @RequestParam("gpucard") String gpucard,
-			@RequestParam("gpucardsrno") String gpucardsrno, @RequestParam("installed_by") String installedby,
-			@RequestParam("param_shavak_version") String param_shavak_version,
-			@RequestParam("studio_license_no") String studio_license_no,
-			@RequestParam("institute_name") String institute_name,
-			@RequestParam("institute_address") String institute_address,
-			@RequestParam("contact_person_name") String contact_person_name, @RequestParam("mobno") String mobno,
-			@RequestParam("emailid") String emailid, @RequestParam("comment") String comment) {
-		Delivery delivery = new Delivery(paramshavakvarient,manufacture, machinemodel, serialno, dispatch_date, installedby,
-				param_shavak_version, studio_license_no, gpucard, gpucardsrno, institute_name, institute_address,
-				contact_person_name, mobno, emailid, comment);
-
-		deliveryDao.save(delivery);
-		
-		Machine machine=machineDao.findBySerialNo(serialno).get(0);
-		machine.setStatus("Dispatch");
-		
-		GPUCard gcard=gpuCardDao.findByGPUSerialno(gpucardsrno).get(0);
-		gcard.setStatus("Dispatch");
-		
-		machineDao.save(machine);
-		gpuCardDao.save(gcard);
-		return new ModelAndView("addnew");
-	}
-
-	@RequestMapping("/viewDelivery")
-	public ModelAndView viewDetails() {
-		List<Delivery> vlist = deliveryDao.findAll();
-		return new ModelAndView("viewDeliveryRecords", "vlist", vlist);
-	}
-
-	@RequestMapping(value="/updatedetails/{id}", method = RequestMethod.GET)
-	public ModelAndView updateDeliveryDetails(@PathVariable int id) {
-		Optional<Delivery> foundRecord = deliveryDao.findById(id);
-		Delivery record= null;
-		if (foundRecord.isPresent()) 
-			record = foundRecord.get();
-		
-		System.out.println("Record : "+record);
-		return new ModelAndView("updateDelivery","record",record);
-	}
-	
-	@RequestMapping("/updatedeliverydetails/{id}")
-	public ModelAndView updateDeliveryDetails(@RequestParam("dispatch_date") String dispatch_date,
-			@RequestParam("installed_by") String installedby,
-			@RequestParam("studio_license_no") String studio_license_no,
-			@RequestParam("institute_name") String institute_name,
-			@RequestParam("institute_address") String institute_address,
-			@RequestParam("contact_person_name") String contact_person_name, @RequestParam("mobno") String mobno,
-			@RequestParam("emailid") String emailid,
-			@RequestParam("param_shavak_version") String paramShavakVersion,
-			@PathVariable int id) {
-		Optional<Delivery> foundRecord = deliveryDao.findById(id);
-		if (foundRecord.isPresent()) {
-			
-			Delivery record = foundRecord.get();
-			System.out.println("Record *** : "+record);
-			record.setDisptachdate(dispatch_date);
-			record.setSysteminstalledby(installedby);
-			record.setStudiolicense(studio_license_no);
-			record.setInstitutename(institute_name);
-			record.setInstitutaddress(institute_address);
-			record.setContactpersonname(contact_person_name);
-			record.setEmailid(emailid);
-			record.setMobileno(mobno);
-			record.setParamshavakversion(paramShavakVersion);
-			
-			deliveryDao.save(record);
-		}
-
-		
-		return new ModelAndView("redirect:/viewdetails");
-	}
-	
-	@RequestMapping("/deletedetails/{id}")
-	public ModelAndView deleteDeliveryDetails(@PathVariable int id) {
-		Optional<Delivery> foundRecord = deliveryDao.findById(id);
-		if (foundRecord.isPresent()) {
-			
-			Delivery record = foundRecord.get();
-			deliveryDao.delete(record);
-		}
-
-		return new ModelAndView("redirect:/viewdetails");
+		return gson.toJson(machineDao.findAvailableBySerialNo(srno).get(0).getGpuCard());
 	}
 	
 	@ResponseBody

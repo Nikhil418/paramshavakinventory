@@ -9,40 +9,43 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<div class="container">
-	<c:if test="${record.gpuid == 0}">
-		<h3 align="center">Add GPU Details</h3>
+	<div class="container">
+	<c:if test="${record.moid == 0}">
+		<h3 align="center">Add Monitor Details</h3>
 	</c:if>
-	<c:if test="${record.gpuid != 0}">
-		<h3 align="center">Update GPU Details</h3>
+	<c:if test="${record.moid != 0}">
+		<h3 align="center">Update Monitor Details</h3>
 	</c:if>
 	<div class="row mt-5">
 	        <div class="col-3"></div>
 	        <div class="col-6">
-		        <form action="/gpu/add/${record.gpuid}" method="POST">
+		        <form action="/monitor/add/${record.moid}" method="POST">
 					<div class="mb-3">
-					  <label for="gpucard" class="form-label">GPU Card</label>
-					  <input type="text" name="gpuCard" value="${record.gpuCard}" class="form-control" placeholder="Enter the gpucard" >
+					  <label for="manufacturer" class="form-label">Manufacturer</label>
+					  <input type="text" name="manufacturer" value="${record.manufacturer}" class="form-control" placeholder="Enter manufacturer">
 					</div>
 					<div class="mb-3">
-					  <label for="gpucard_serial_number" class="form-label">GPU Card Serial Number</label>
-					  <input type="text" name="gpuCardSerialNumber" value="${record.gpuCardSerialNumber}" class="form-control" placeholder="Enter the gpucard serial number" >
+					  <label for="monitorModel" class="form-label">Monitor Model</label>
+					  <input type="text" name="monitorModel" value="${record.monitorModel}" class="form-control" placeholder="Enter Monitor Model">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Issued On Date</label>
-					  <input type="date" name="issuedOnDate" value="${record.issuedOnDate}" class="form-control" placeholder="Enter the issued date" >
+					  <label for="serialNo" class="form-label">Serial No.</label>
+					  <input type="text" name="serialNo" value="${record.serialNo}" class="form-control" placeholder="Enter monitor serial number">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Issued On Name</label>
+					  <label for="issuedOnDate" class="form-label">Issued On Date</label>
+					  <input type="date" name="issuedOnDate" value="${record.issuedOnDate}" class="form-control" placeholder="Enter issued date">
+					</div>
+					<div class="mb-3">
+					  <label for="issuedOnName" class="form-label">Issued On Name</label>
 					  <input type="text" name="issuedOnName" value="${record.issuedOnName}" class="form-control" placeholder="Enter issued name">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Mobile</label>
+					  <label for="mobile" class="form-label">Mobile No</label>
 					  <input type="number" name="mobile" value="${record.mobile}" class="form-control" placeholder="Enter the mobile number">
 					</div>
 					
-					<c:if test="${record.gpuid != 0}">
+					<c:if test="${record.moid != 0}">
 						<div class="mb-3">
 						  <label for="status" class="form-label">Status</label>
 						  <select class="form-select" name="status" id="status" required>
@@ -59,25 +62,25 @@
 					
 					<div class="mb-3">
 					  <label for="comment" class="form-label">Comment</label>
-					  <textarea name="comment" value="${record.comment}" class="form-control" class="form-control" id="comment" rows="3"></textarea>
+					  <textarea name="comment" value="${record.comment}" class="form-control" id="comment" rows="3"></textarea>
 					</div>
-					<c:if test="${record.gpuid == 0}">
-						<input class="btn btn-success" type="submit" value="Add GPU">
+					
+					<c:if test="${record.moid == 0}">
+						<input class="btn btn-success" type="submit" value="Add Monitor">
 					</c:if>
-					<c:if test="${record.gpuid != 0}">
-						<input class="btn btn-success" type="submit" value="Update GPU">
-					</c:if>
-					<c:if test="${record.gpuid == 0}">
-						<a href="/addnew"><button class="btn btn-danger" type="button">Cancel</button></a>
-					</c:if>
-					<c:if test="${record.gpuid != 0}">
-						<a href="/gpu/view"><button class="btn btn-danger" type="button">Cancel</button></a>
+					<c:if test="${record.moid != 0}">
+						<input class="btn btn-success" type="submit" value="Update Monitor">
 					</c:if>
 					
+					<c:if test="${record.moid == 0}">
+						<a href="/addnew"><button class="btn btn-danger" type="button">Cancel</button></a>
+					</c:if>
+					<c:if test="${record.moid != 0}">
+						<a href="/monitor/view"><button class="btn btn-danger" type="button">Cancel</button></a>
+					</c:if>
 				</form>
 	        </div>
 	        <div class="col-3"></div>
 	</div>
-</div>
 </body>
 </html>

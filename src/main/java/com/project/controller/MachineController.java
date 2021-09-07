@@ -1,39 +1,67 @@
 package com.project.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.dao.MachineDao;
-import com.project.model.Delivery;
 import com.project.model.Machine;
 
 @Controller
+@RequestMapping("/machine")
 public class MachineController {  
 	
 	@Autowired
 	MachineDao machineDao;
   
-	@RequestMapping("/addMachine")
-	public String addMachine() {
-		return "addmachine";
+	@GetMapping("/add")
+	public ModelAndView showAddMachinePage() {
+		return new ModelAndView("addmachine","record", new Machine());
 	}  
 	
-	@RequestMapping("/insertmachine")
-	public ModelAndView insertMachine(@RequestParam("manufacture") String manufacture,@RequestParam("machine_model") String machinemodel,@RequestParam("serial_number") String serialnumber,@RequestParam("issued_on_date") String issued_on_date,@RequestParam("issued_on_name") String issued_on_name,@RequestParam("GPU_card") String GPUCard,@RequestParam("GPU_card_serialNumber") String GPU_card_serialNumber,@RequestParam("mobile") String mobile,@RequestParam("comment") String comment,@RequestParam("status") String status ) {
-		Machine machine=new Machine(manufacture,machinemodel,serialnumber,issued_on_date,issued_on_name,GPUCard,GPU_card_serialNumber,mobile,comment,status);
-		
+	@PostMapping("/add/{id}")
+	public ModelAndView addMachine(Machine machine, @PathVariable int id) {
+		if (machineDao.findById(id).isPresent())
+			machine.setMid(id);
+		System.out.println("Machine : "+machine);
 		machineDao.save(machine);
-		return new ModelAndView("addnew");
-		
-	}  
-	@RequestMapping("/viewMachine")
+		return new ModelAndView("redirect:/machine/view");
+	}
+	
+	@GetMapping("/view")
 	public ModelAndView viewMachineDetails() {
 		List<Machine> vlist = machineDao.findAll();
 		return new ModelAndView("viewMachineRecords", "vlist", vlist);
+	}
+	
+	@RequestMapping(value="/update/{id}", method = RequestMethod.GET)
+	public ModelAndView updateMachineDetails(@PathVariable int id) {
+		Optional<Machine> foundRecord = machineDao.findById(id);
+		Machine machine = null;
+		if (foundRecord.isPresent()) 
+			machine = foundRecord.get();
+		
+		System.out.println("Record : "+machine);
+		return new ModelAndView("addmachine","record",machine);
+	}
+	
+	@RequestMapping("/delete/{id}")
+	public ModelAndView deleteMachineDetails(@PathVariable int id) {
+		Optional<Machine> foundRecord = machineDao.findById(id);
+		if (foundRecord.isPresent()) {
+			
+			Machine record = foundRecord.get();
+			machineDao.delete(record);
+		}
+
+		return new ModelAndView("redirect:/machine/view");
 	}
 }

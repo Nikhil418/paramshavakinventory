@@ -9,8 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.project</groupId>
-	<artifactId>ParamShavak_Inventory</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>psinventory</artifactId>
+	<version>1.0</version>
+	<packaging>war</packaging>
 	<name>ParamShavak_Inventory</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -42,7 +43,6 @@
 		    <artifactId>tomcat-jasper</artifactId>
 		    <version>9.0.41</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl -->
 		<dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -72,6 +72,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

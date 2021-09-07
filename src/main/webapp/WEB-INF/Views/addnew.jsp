@@ -9,10 +9,12 @@
 <link rel="stylesheet" href="/css/design.css">
 </head>
 <body align="center">
-<div class="m-4">
-	<a href="/addMachine" type="button" name="machine" class="btn btn-dark">Add Machine details</a>
-	<a href="/addGPUCard" type="button" name="gpucard" class="btn btn-warning">Add GPUCard details</a>
-	<a href="/addDelivery" type="button" name="delivery" class="btn btn-info">Add Delivery details</a>
-</div>
+ 	<jsp:include page="header.jsp"/>
+	<div class="m-4">
+		<a href="/machine/add" type="button" class="btn btn-dark">Add Machine</a>
+		<a href="/gpu/add" type="button" class="btn btn-warning">Add GPUCard</a>
+		<a href="/monitor/add" type="button" class="btn btn-dark">Add Monitor</a>
+		<a href="/delivery/add" type="button" class="btn btn-info">Add Delivery details</a>
+	</div>
 </body>
 </html>

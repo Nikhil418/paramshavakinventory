@@ -15,196 +15,115 @@ public class Machine {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "mid")
 	private int mid;
-	private String manufacture;
-	private String machinemodel;
-	@Column(unique = true)
-	private String serialno;
-	private String issued_on_date;
-	private String issued_on_name;
-	private String gpu_card;
-	private String gpu_card_serial_number;
+	
+	@Column(name = "manufacturer")
+	private String manufacturer;
+	
+	@Column(name = "machine_model")
+	private String machineModel;
+	
+	@Column(unique = true, name = "serial_no")
+	private String serialNo;
+	
+	@Column(name = "issued_on_date")
+	private String issuedOnDate;
+	
+	@Column(name = "issued_on_name")
+	private String issuedOnName;
+	
+	@Column(name = "gpu_card")
+	private String gpuCard;
+	
+	@Column(name = "gpu_card_serial_number")
+	private String gpuCardSerialNumber;
+	
+	@Column(name = "mobile")
 	private String mobile;
+	
+	@Column(name = "comment")
 	private String comment;
-	@ColumnDefault(value = "Available")
+	
+	@Column(name = "status")
 	private String status;
 	
-	
-	
 	public Machine() {
-		super();
-		this.manufacture = null;
-		this.machinemodel = null;
-		this.serialno = null;
-		this.issued_on_date = null;
-		this.issued_on_name = null;
-		this.gpu_card = null;
-		this.gpu_card_serial_number = null;
-		this.mobile = null;
-		this.comment = null;
-		this.status=null;
+		this.status = "Available";
 	}
-
-
-
-	public Machine(String manufacture, String machinemodel, String serialno, String issued_on_date,
-			String issued_on_name, String gPU_card, String gPU_card_Serial_Number, String mobile,
-			String comment,String status) {
-		super();
-		this.manufacture = manufacture;
-		this.machinemodel = machinemodel;
-		this.serialno = serialno;
-		this.issued_on_date = issued_on_date;
-		this.issued_on_name = issued_on_name;
-		this.gpu_card = gPU_card;
-		this.gpu_card_serial_number = gPU_card_Serial_Number;
-		this.mobile = mobile;
-		this.comment = comment;
-		this.status=status;
-	}
-
-
-
-	public String getStatus() {
-		return status;
-	}
-
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-
-
+	
 	public int getMid() {
 		return mid;
 	}
-
-
-
 	public void setMid(int mid) {
 		this.mid = mid;
 	}
-
-
-	public String getManufacture() {
-		return manufacture;
+	public String getManufacturer() {
+		return manufacturer;
 	}
-
-
-	public void setManufacture(String manufacture) {
-		this.manufacture = manufacture;
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
-
-
-
-	public String getMachinemodel() {
-		return machinemodel;
+	public String getMachineModel() {
+		return machineModel;
 	}
-
-
-
-	public void setMachinemodel(String machinemodel) {
-		this.machinemodel = machinemodel;
+	public void setMachineModel(String machineModel) {
+		this.machineModel = machineModel;
 	}
-
-
-
-	public String getSerialno() {
-		return serialno;
+	public String getSerialNo() {
+		return serialNo;
 	}
-
-
-
-	public void setSerialno(String serialno) {
-		this.serialno = serialno;
+	public void setSerialNo(String serialNo) {
+		this.serialNo = serialNo;
 	}
-
-
-
-	public String getIssued_on_date() {
-		return issued_on_date;
+	public String getIssuedOnDate() {
+		return issuedOnDate;
 	}
-
-
-
-	public void setIssued_on_date(String issued_on_date) {
-		this.issued_on_date = issued_on_date;
+	public void setIssuedOnDate(String issuedOnDate) {
+		this.issuedOnDate = issuedOnDate;
 	}
-
-
-
-	public String getIssued_on_name() {
-		return issued_on_name;
+	public String getIssuedOnName() {
+		return issuedOnName;
 	}
-
-
-
-	public void setIssued_on_name(String issued_on_name) {
-		this.issued_on_name = issued_on_name;
+	public void setIssuedOnName(String issuedOnName) {
+		this.issuedOnName = issuedOnName;
 	}
-
-
-	public String getGpu_card() {
-		return gpu_card;
+	public String getGpuCard() {
+		return gpuCard;
 	}
-
-
-
-	public void setGpu_card(String gpu_card) {
-		this.gpu_card = gpu_card;
+	public void setGpuCard(String gpuCard) {
+		this.gpuCard = gpuCard;
 	}
-
-
-
-	public String getGpu_card_serial_number() {
-		return gpu_card_serial_number;
+	public String getGpuCardSerialNumber() {
+		return gpuCardSerialNumber;
 	}
-
-
-
-	public void setGpu_card_serial_number(String gpu_card_serial_number) {
-		this.gpu_card_serial_number = gpu_card_serial_number;
+	public void setGpuCardSerialNumber(String gpuCardSerialNumber) {
+		this.gpuCardSerialNumber = gpuCardSerialNumber;
 	}
-
-
-
 	public String getMobile() {
 		return mobile;
 	}
-
-
-
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-
-
-
 	public String getComment() {
 		return comment;
 	}
-
-
-
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
-
-
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "Machine [manufacture=" + manufacture + ", machinemodel=" + machinemodel + ", serialno=" + serialno
-				+ ", issued_on_date=" + issued_on_date + ", issued_on_name=" + issued_on_name + ", gpu_card=" + gpu_card
-				+ ", gpu_card_serial_number=" + gpu_card_serial_number + ", mobile=" + mobile + ", comment=" + comment
-				+ ", status=" + status + "]";
+		return "Machine [mid=" + mid + ", manufacturer=" + manufacturer + ", machineModel=" + machineModel + ", serialNo="
+				+ serialNo + ", issuedOnDate=" + issuedOnDate + ", issuedOnName=" + issuedOnName + ", gpuCard="
+				+ gpuCard + ", gpuCardSerialNumber=" + gpuCardSerialNumber + ", mobile=" + mobile + ", comment="
+				+ comment + ", status=" + status + "]";
 	}
-
-
-
-	
-	
 	
 }

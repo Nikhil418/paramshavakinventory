@@ -9,28 +9,32 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<jsp:include page="header.jsp"/>
 
 <div class="m-3">
 	<h3 align="center"> Delivery Records</h3>
 	<table class="table table-striped table-bordered">
 	<thead>
 	<tr>
-	<th>Param Shavak Varient</th>
-	<th>Manufacture</th>
+	<th>Param Shavak Variant</th>
+	<th>Machine Manufacturer</th>
 	<th>Machine Model</th>
 	<th>Machine Sr. No.</th>
+	<th>Monitor Manufacturer</th>
+	<th>Monitor Model</th>
+	<th>Monitor Sr. No.</th>
 	<th>Dispatch Date</th>
-	<th>Sys. Installed By</th>
-	<th>Paramshavak Version</th>
+	<th>System Installed By</th>
+	<th>Param Shavak Version</th>
 	<th>Parallel Studio Licence No</th>
 	<th>GPU Card</th>
 	<th>GPU Card Sr No.</th>
 	<th>Institute Name</th>
-	<th>Institude Address</th>
+	<th>Institute Address</th>
 	<th>Contact Person Name</th>
 	<th>Mobile No.</th>
 	<th>Email Id</th>
+	<th>Status</th>
 	<th>Action</th>
 	
 	
@@ -39,24 +43,28 @@
 	<tbody>
 	<c:forEach var="s" items="${vlist }">
 	<tr>
-	<td>${s.paramshavakvarient }</td>
-	<td>${s.manufacture }</td>
-	<td>${s.machinemodel }</td>
-	<td>${s.serialno }</td>
-	<td>${s.disptachdate }</td>
-	<td>${s.systeminstalledby }</td>
-	<td>${s.paramshavakversion }</td>
-	<td>${s.studiolicense }</td>
-	<td>${s.gpucard }</td>
-	<td>${s.gpucardsrno }</td>
-	<td>${s.institutename }</td>
-	<td>${s.institutaddress }</td>
-	<td>${s.contactpersonname }</td>
-	<td>${s.mobileno }</td>
-	<td>${s.emailid }</td>
+	<td>${s.paramShavakVariant }</td>
+	<td>${s.machineManufacturer }</td>
+	<td>${s.machineModel }</td>
+	<td>${s.machineSerialNo }</td>
+	<td>${s.monitorManufacturer }</td>
+	<td>${s.monitorModel }</td>
+	<td>${s.monitorSerialNo }</td>
+	<td>${s.disptachDate }</td>
+	<td>${s.systemInstalledBy }</td>
+	<td>${s.paramShavakVersion }</td>
+	<td>${s.studioLicense }</td>
+	<td>${s.gpuCard }</td>
+	<td>${s.gpuCardSerialNo }</td>
+	<td>${s.instituteName }</td>
+	<td>${s.institutAddress }</td>
+	<td>${s.contactPersonName }</td>
+	<td>${s.mobile }</td>
+	<td>${s.emailId }</td>
+	<td>${s.status }</td>
 	<td>
-		<a href="updatedetails/${s.did}" class="btn btn-warning ml-4 float-right">Update</a>
-		<a href="deletedetails/${s.did}" class="btn btn-danger ml-4 float-right">Delete</a>
+		<a href="update/${s.did}" class="btn btn-warning ml-4 float-right">Update</a>
+		<a href="delete/${s.did}" class="btn btn-danger ml-4 float-right">Delete</a>
 	</td>
 	</tr>
 	</c:forEach>

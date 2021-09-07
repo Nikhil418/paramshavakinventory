@@ -9,10 +9,12 @@
 </head>
 <body align="center">
 <h3>View Records</h3>
-<div class="m-4">
-	<a href="/viewMachine" type="button" name="add" class="btn btn-dark">View machine Details</a>
-	<a href="/viewGPU" type="button" name="viewall"class="btn btn-dark">View GPU details</a>
-	<a href="/viewDelivery" type="button" name="viewall" class="btn btn-dark">View Delivery details</a>
-</div>
+	<jsp:include page="header.jsp"/>
+	<div class="m-4">
+		<a href="/machine/view" type="button" class="btn btn-dark">View Machine Details</a>
+		<a href="/gpu/view" type="button" class="btn btn-dark">View GPU details</a>
+		<a href="/monitor/view" type="button" class="btn btn-dark">View Monitor Details</a>
+		<a href="/delivery/view" type="button" class="btn btn-dark">View Delivery details</a>
+	</div>
 </body>
 </html>

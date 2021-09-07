@@ -12,261 +12,264 @@ public class Delivery {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "did")
 	private int did;
-	private String paramshavakvarient;
-	private String manufacture;
-	private String machinemodel;
-	@Column(unique = true)
-	private String serialno;
-	private String disptachdate;
-	private String systeminstalledby;
-	private String paramshavakversion;
-	private String studiolicense;
-	private String gpucard;
-	private String gpucardsrno;
-	private String institutename;
-	private String institutaddress;
-	private String contactpersonname;
-	private String mobileno;
-	private String emailid;
-	private String Comment;  
 	
+	@Column(name = "param_shavak_variant")
+	private String paramShavakVariant;
+	
+	@Column(name = "machine_manufacturer")
+	private String machineManufacturer;
+	
+	@Column(name = "machine_model")
+	private String machineModel;
+	
+	@Column(unique = true, name = "monitor_serial_no")
+	private String monitorSerialNo;
+	
+	@Column(name = "monitor_manufacturer")
+	private String monitorManufacturer;
+	
+	@Column(name = "monitor_model")
+	private String monitorModel;
+	
+	@Column(unique = true, name = "machine_serial_no")
+	private String machineSerialNo;
+	
+	@Column(name = "disptach_date")
+	private String disptachDate;
+	
+	@Column(name = "system_installed_by")
+	private String systemInstalledBy;
+	
+	@Column(name = "param_shavak_version")
+	private String paramShavakVersion;
+	
+	@Column(name = "in_built_gpu_card")
+	private String inBuiltGpuCard;
+	
+	@Column(name = "studio_license")
+	private String studioLicense;
+	
+	@Column(name = "gpu_card")
+	private String gpuCard;
+	
+	@Column(name = "gpu_card_serial_no")
+	private String gpuCardSerialNo;
+	
+	@Column(name = "institute_name")
+	private String instituteName;
+	
+	@Column(name = "institut_address")
+	private String institutAddress;
+	
+	@Column(name = "contact_person_name")
+	private String contactPersonName;
+	
+	@Column(name = "mobile")
+	private String mobile;
+	
+	@Column(name = "email_id")
+	private String emailId;
+	
+	@Column(name = "comment")
+	private String comment;  
+	
+	@Column(name = "status")
+	private String status;
 	
 	public Delivery() {
-		super();
+		this.did = 0;
+		this.status = "Dispatched";
 	}
-
-	public String getParamshavakvarient() {
-		return paramshavakvarient;
-	}
-
-	public void setParamshavakvarient(String paramshavakvarient) {
-		this.paramshavakvarient = paramshavakvarient;
-	}
-
-	public String getManufacture() {
-		return manufacture;
-	}
-
-
-	void setManufacture(String manufacture) {
-		this.manufacture = manufacture;
-	}
-
-
-
-
-
-
-	public String getMachinemodel() {
-		return machinemodel;
-	}
-
-
-
-
-
-	public void setMachinemodel(String machinemodel) {
-		this.machinemodel = machinemodel;
-	}
-
-
-
-
-
-	public String getSerialno() {
-		return serialno;
-	}
-
-
-
-
-
-	public void setSerialno(String serialno) {
-		this.serialno = serialno;
-	}
-
-
-
-
-
-	public String getGpucard() {
-		return gpucard;
-	}
-
-
-
-
-
-	public void setGpucard(String gpucard) {
-		this.gpucard = gpucard;
-	}
-
-
-
-
-
-	public String getGpucardsrno() {
-		return gpucardsrno;
-	}
-
-
-
-
-
-	public void setGpucardsrno(String gpucardsrno) {
-		this.gpucardsrno = gpucardsrno;
-	}
-
-
-
-
-
-	public Delivery(String paramshavakvarient, String manufacture, String machinemodel, String serialno, String disptachdate,
-			String systeminstalledby, String paramshavakversion, String studiolicense, String gpucard,
-			String gpucardsrno, String institutename, String institutaddress, String contactpersonname, String mobileno,
-			String emailid, String comment) {
-		super();
-		this.paramshavakvarient = paramshavakvarient;
-		this.manufacture = manufacture;
-		this.machinemodel = machinemodel;
-		this.serialno = serialno;
-		this.disptachdate = disptachdate;
-		this.systeminstalledby = systeminstalledby;
-		this.paramshavakversion = paramshavakversion;
-		this.studiolicense = studiolicense;
-		this.gpucard = gpucard;
-		this.gpucardsrno = gpucardsrno;
-		this.institutename = institutename;
-		this.institutaddress = institutaddress;
-		this.contactpersonname = contactpersonname;
-		this.mobileno = mobileno;
-		this.emailid = emailid;
-		Comment = comment;
-	}
-
-
-
-
 
 	public int getDid() {
 		return did;
 	}
 
-
 	public void setDid(int did) {
 		this.did = did;
 	}
 
-
-	public String getDisptachdate() {
-		return disptachdate;
+	public String getParamShavakVariant() {
+		return paramShavakVariant;
 	}
 
-
-	public void setDisptachdate(String disptachdate) {
-		this.disptachdate = disptachdate;
+	public void setParamShavakVariant(String paramShavakVariant) {
+		this.paramShavakVariant = paramShavakVariant;
 	}
 
-
-	public String getSysteminstalledby() {
-		return systeminstalledby;
+	public String getMonitorSerialNo() {
+		return monitorSerialNo;
 	}
 
-
-	public void setSysteminstalledby(String systeminstalledby) {
-		this.systeminstalledby = systeminstalledby;
+	public void setMonitorSerialNo(String monitorSerialNo) {
+		this.monitorSerialNo = monitorSerialNo;
 	}
 
-
-	public String getStudiolicense() {
-		return studiolicense;
+	public String getMachineManufacturer() {
+		return machineManufacturer;
 	}
 
-
-	public void setStudiolicense(String studiolicense) {
-		this.studiolicense = studiolicense;
+	public void setMachineManufacturer(String machineManufacturer) {
+		this.machineManufacturer = machineManufacturer;
 	}
 
-
-	public String getParamshavakversion() {
-		return paramshavakversion;
+	public String getMonitorManufacturer() {
+		return monitorManufacturer;
 	}
 
-
-	public void setParamshavakversion(String paramshavakversion) {
-		this.paramshavakversion = paramshavakversion;
+	public void setMonitorManufacturer(String monitorManufacturer) {
+		this.monitorManufacturer = monitorManufacturer;
 	}
 
-
-	public String getInstitutename() {
-		return institutename;
+	public String getMonitorModel() {
+		return monitorModel;
 	}
 
-
-	public void setInstitutename(String institutename) {
-		this.institutename = institutename;
+	public void setMonitorModel(String monitorModel) {
+		this.monitorModel = monitorModel;
 	}
 
-
-	public String getInstitutaddress() {
-		return institutaddress;
+	public String getMachineModel() {
+		return machineModel;
 	}
 
-
-	public void setInstitutaddress(String institutaddress) {
-		this.institutaddress = institutaddress;
+	public void setMachineModel(String machineModel) {
+		this.machineModel = machineModel;
 	}
 
-
-	public String getContactpersonname() {
-		return contactpersonname;
+	public String getMachineSerialNo() {
+		return machineSerialNo;
 	}
 
-
-	public void setContactpersonname(String contactpersonname) {
-		this.contactpersonname = contactpersonname;
+	public void setMachineSerialNo(String machineSerialNo) {
+		this.machineSerialNo = machineSerialNo;
 	}
 
-
-	public String getMobileno() {
-		return mobileno;
+	public String getDisptachDate() {
+		return disptachDate;
 	}
 
-
-	public void setMobileno(String mobileno) {
-		this.mobileno = mobileno;
+	public void setDisptachDate(String disptachDate) {
+		this.disptachDate = disptachDate;
 	}
 
-
-	public String getEmailid() {
-		return emailid;
+	public String getSystemInstalledBy() {
+		return systemInstalledBy;
 	}
 
-
-	public void setEmailid(String emailid) {
-		this.emailid = emailid;
+	public void setSystemInstalledBy(String systemInstalledBy) {
+		this.systemInstalledBy = systemInstalledBy;
 	}
 
+	public String getParamShavakVersion() {
+		return paramShavakVersion;
+	}
+
+	public void setParamShavakVersion(String paramShavakVersion) {
+		this.paramShavakVersion = paramShavakVersion;
+	}
+
+	public String getInBuiltGpuCard() {
+		return inBuiltGpuCard;
+	}
+
+	public void setInBuiltGpuCard(String inBuiltGpuCard) {
+		this.inBuiltGpuCard = inBuiltGpuCard;
+	}
+
+	public String getStudioLicense() {
+		return studioLicense;
+	}
+
+	public void setStudioLicense(String studioLicense) {
+		this.studioLicense = studioLicense;
+	}
+
+	public String getGpuCard() {
+		return gpuCard;
+	}
+
+	public void setGpuCard(String gpuCard) {
+		this.gpuCard = gpuCard;
+	}
+
+	public String getGpuCardSerialNo() {
+		return gpuCardSerialNo;
+	}
+
+	public void setGpuCardSerialNo(String gpuCardSerialNo) {
+		this.gpuCardSerialNo = gpuCardSerialNo;
+	}
+
+	public String getInstituteName() {
+		return instituteName;
+	}
+
+	public void setInstituteName(String instituteName) {
+		this.instituteName = instituteName;
+	}
+
+	public String getInstitutAddress() {
+		return institutAddress;
+	}
+
+	public void setInstitutAddress(String institutAddress) {
+		this.institutAddress = institutAddress;
+	}
+
+	public String getContactPersonName() {
+		return contactPersonName;
+	}
+
+	public void setContactPersonName(String contactPersonName) {
+		this.contactPersonName = contactPersonName;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
 
 	public String getComment() {
-		return Comment;
+		return comment;
 	}
-
 
 	public void setComment(String comment) {
-		Comment = comment;
+		this.comment = comment;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
-		return "Delivery [ paramshavakvarient=" + paramshavakvarient + ", manufacture=" + manufacture
-				+ ", machinemodel=" + machinemodel + ", serialno=" + serialno + ", disptachdate=" + disptachdate
-				+ ", systeminstalledby=" + systeminstalledby + ", paramshavakversion=" + paramshavakversion
-				+ ", studiolicense=" + studiolicense + ", gpucard=" + gpucard + ", gpucardsrno=" + gpucardsrno
-				+ ", institutename=" + institutename + ", institutaddress=" + institutaddress + ", contactpersonname="
-				+ contactpersonname + ", mobileno=" + mobileno + ", emailid=" + emailid + ", Comment=" + Comment + "]";
+		return "Delivery [did=" + did + ", paramShavakVariant=" + paramShavakVariant + ", machineManufacturer="
+				+ machineManufacturer + ", machineModel=" + machineModel + ", monitorSerialNo=" + monitorSerialNo
+				+ ", monitorManufacturer=" + monitorManufacturer + ", monitorModel=" + monitorModel + ", machineSerialNo="
+				+ machineSerialNo + ", disptachDate=" + disptachDate + ", systemInstalledBy=" + systemInstalledBy
+				+ ", paramShavakVersion=" + paramShavakVersion + ", inBuiltGpuCard=" + inBuiltGpuCard
+				+ ", studioLicense=" + studioLicense + ", gpuCard=" + gpuCard + ", gpuCardSerialNo=" + gpuCardSerialNo
+				+ ", instituteName=" + instituteName + ", institutAddress=" + institutAddress + ", contactPersonName="
+				+ contactPersonName + ", mobile=" + mobile + ", emailId=" + emailId + ", comment=" + comment
+				+ ", status=" + status + "]";
 	}
 	
 }

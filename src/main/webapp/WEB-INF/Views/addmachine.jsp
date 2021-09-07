@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,51 +10,82 @@
 </head>
 <body>
 	<div class="container">
-	<h3 align="center">Add Machine Details</h3>
+	<c:if test="${record.mid == 0}">
+		<h3 align="center">Add Machine Details</h3>
+	</c:if>
+	<c:if test="${record.mid != 0}">
+		<h3 align="center">Update Machine Details</h3>
+	</c:if>
 	<div class="row mt-5">
 	        <div class="col-3"></div>
 	        <div class="col-6">
-		        <form action="/insertmachine">
+		        <form action="/machine/add/${record.mid}" method="POST">
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Manufacture</label>
-					  <input type="text" name="manufacture" class="form-control" placeholder="Enter Manufacture">
+					  <label for="manufacturer" class="form-label">Manufacturer</label>
+					  <input type="text" name="manufacturer" value="${record.manufacturer}" class="form-control" placeholder="Enter Manufacturer">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Machine Model</label>
-					  <input type="text" name="machine_model" class="form-control" placeholder="Enter machine model">
+					  <label for="machineModel" class="form-label">Machine Model</label>
+					  <input type="text" name="machineModel" value="${record.machineModel}" class="form-control" placeholder="Enter machine model">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Serial No.</label>
-					  <input type="text" name="serial_number" class="form-control" placeholder="Enter machine serial number">
+					  <label for="serialNo" class="form-label">Serial No.</label>
+					  <input type="text" name="serialNo" value="${record.serialNo}" class="form-control" placeholder="Enter machine serial number">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Issued On Date</label>
-					  <input type="date" name="issued_on_date" class="form-control" placeholder="Enter issued date">
+					  <label for="issuedOnDate" class="form-label">Issued On Date</label>
+					  <input type="date" name="issuedOnDate" value="${record.issuedOnDate}" class="form-control" placeholder="Enter issued date">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Issuded On Name</label>
-					  <input type="text" name="issued_on_name" class="form-control" placeholder="Enter issued name">
+					  <label for="issuedOnName" class="form-label">Issuded On Name</label>
+					  <input type="text" name="issuedOnName" value="${record.issuedOnName}" class="form-control" placeholder="Enter issued name">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">GPU Card</label>
-					  <input type="text" name="GPU_card" class="form-control" placeholder="Enter the GPU card">
+					  <label for="gpuCard" class="form-label">GPU Card</label>
+					  <input type="text" name="gpuCard" value="${record.gpuCard}" class="form-control" placeholder="Enter the GPU card">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">GPU Card Sr.No</label>
-					  <input type="text" name="GPU_card_serialNumber" class="form-control" placeholder="Enter the GPU card serialNumber">
+					  <label for="gpuCardSerialNumber" class="form-label">GPU Card Sr.No</label>
+					  <input type="text" name="gpuCardSerialNumber" value="${record.gpuCardSerialNumber}" class="form-control" placeholder="Enter the GPU card serialNumber">
 					</div>
 					<div class="mb-3">
-					  <label for="machine_type" class="form-label">Mobile No</label>
-					  <input type="number" name="mobile" class="form-control" placeholder="Enter the mobile number">
+					  <label for="mobile" class="form-label">Mobile No</label>
+					  <input type="number" name="mobile" value="${record.mobile}" class="form-control" placeholder="Enter the mobile number">
 					</div>
+					
+					<c:if test="${record.mid != 0}">
+						<div class="mb-3">
+						  <label for="status" class="form-label">Status</label>
+						  <select class="form-select" name="status" id="status" required>
+						    <option value="${record.status}" selected="selected"> ${record.status} </option>
+						    <c:if test="${record.status == 'Available'}">
+						    	<option value="Dispatch">Dispatch</option>
+						    </c:if>
+						    <c:if test="${record.status == 'Dispatch'}">
+						    	<option value="Available">Available</option>
+						    </c:if>
+						  </select>
+						</div>
+					</c:if>
+					
 					<div class="mb-3">
 					  <label for="comment" class="form-label">Comment</label>
-					  <textarea name="comment" class="form-control" id="comment" rows="3"></textarea>
+					  <textarea name="comment" value="${record.comment}" class="form-control" id="comment" rows="3"></textarea>
 					</div>
-					<div class="mb-3">
-					<input type="hidden" name="status" value="Available" readonly>
-					</div>
-					<input class="btn btn-success" type="submit" value="Add Machine">
+					
+					<c:if test="${record.mid == 0}">
+						<input class="btn btn-success" type="submit" value="Add Machine">
+					</c:if>
+					<c:if test="${record.mid != 0}">
+						<input class="btn btn-success" type="submit" value="Update Machine">
+					</c:if>
+					
+					<c:if test="${record.mid == 0}">
+						<a href="/addnew"><button class="btn btn-danger" type="button">Cancel</button></a>
+					</c:if>
+					<c:if test="${record.mid != 0}">
+						<a href="/machine/view"><button class="btn btn-danger" type="button">Cancel</button></a>
+					</c:if>
 				</form>
 	        </div>
 	        <div class="col-3"></div>

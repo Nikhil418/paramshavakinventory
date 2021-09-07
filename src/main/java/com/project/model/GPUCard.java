@@ -11,49 +11,34 @@ import javax.persistence.Table;
 public class GPUCard {
 	@Id
 	@GeneratedValue
+	@Column(name = "gpuid")
 	private int gpuid;
+	
+	@Column(name = "gpu_card")
 	private String gpuCard;
-	@Column(unique = true)
+	
+	@Column(unique = true, name="gpu_card_serial_number")
 	private String gpuCardSerialNumber;
-	private String issued_on_date;
-	private String issued_on_name;
+	
+	@Column(name = "issued_on_date")
+	private String issuedOnDate;
+	
+	@Column(name = "issued_on_name")
+	private String issuedOnName;
+	
+	@Column(name = "mobile")
 	private String mobile;
+	
+	@Column(name = "comment")
 	private String comment;
+	
+	@Column(name = "status")
 	private String status;
 	
 	
 	public GPUCard() {
 		super();
-		this.gpuCard = null;
-		this.gpuCardSerialNumber = null;
-		this.issued_on_date = null;
-		this.issued_on_name = null;
-		this.mobile = null;
-		this.comment = null;
-		this.status=null;
-	}
-
-
-	public GPUCard(String gpuCard, String gpuCardSerialNumber, String issued_on_date, String issued_on_name,
-			String mobile, String comment,String status) {
-		super();
-		this.gpuCard = gpuCard;
-		this.gpuCardSerialNumber = gpuCardSerialNumber;
-		this.issued_on_date = issued_on_date;
-		this.issued_on_name = issued_on_name;
-		this.mobile = mobile;
-		this.comment = comment;
-		this.status=status;
-	}
-
-
-	public String getStatus() {
-		return status;
-	}
-
-
-	public void setStatus(String status) {
-		this.status = status;
+		this.status="Available";
 	}
 
 
@@ -87,23 +72,23 @@ public class GPUCard {
 	}
 
 
-	public String getIssued_on_date() {
-		return issued_on_date;
+	public String getIssuedOnDate() {
+		return issuedOnDate;
 	}
 
 
-	public void setIssued_on_date(String issued_on_date) {
-		this.issued_on_date = issued_on_date;
+	public void setIssuedOnDate(String issuedOnDate) {
+		this.issuedOnDate = issuedOnDate;
 	}
 
 
-	public String getIssued_on_name() {
-		return issued_on_name;
+	public String getIssuedOnName() {
+		return issuedOnName;
 	}
 
 
-	public void setIssued_on_name(String issued_on_name) {
-		this.issued_on_name = issued_on_name;
+	public void setIssuedOnName(String issuedOnName) {
+		this.issuedOnName = issuedOnName;
 	}
 
 
@@ -127,16 +112,20 @@ public class GPUCard {
 	}
 
 
-	@Override
-	public String toString() {
-		return "GPUCard [gpuCard=" + gpuCard + ", gpuCardSerialNumber=" + gpuCardSerialNumber + ", issued_on_date="
-				+ issued_on_date + ", issued_on_name=" + issued_on_name + ", mobile=" + mobile + ", comment=" + comment
-				+ ", status=" + status + "]";
+	public String getStatus() {
+		return status;
 	}
 
 
-	
-	
-	
-	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	@Override
+	public String toString() {
+		return "GPUCard [gpuid=" + gpuid + ", gpuCard=" + gpuCard + ", gpuCardSerialNumber=" + gpuCardSerialNumber
+				+ ", issuedOnDate=" + issuedOnDate + ", issuedOnName=" + issuedOnName + ", mobile=" + mobile
+				+ ", comment=" + comment + ", status=" + status + "]";
+	}
 }

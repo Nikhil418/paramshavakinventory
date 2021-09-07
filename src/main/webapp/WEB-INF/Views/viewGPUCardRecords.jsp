@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <div class="m-3">
 	<h3 align="center"> GPUCard Records</h3>
 	<table class="table table-striped table-bordered">
@@ -20,7 +21,7 @@
 	<th>Issued on Name</th>
 	<th>Mobile No.</th>
 	<th>status</th>
-	
+	<th>Action</th>
 	
 	</tr>
 	</thead>
@@ -29,10 +30,14 @@
 	<tr>
 	<td>${s.gpuCard }</td>
 	<td>${s.gpuCardSerialNumber }</td>
-	<td>${s.issued_on_date }</td>
-	<td>${s.issued_on_name }</td>
+	<td>${s.issuedOnDate }</td>
+	<td>${s.issuedOnName }</td>
 	<td>${s.mobile }</td>
 	<td>${s.status }</td>
+	<td>
+		<a href="update/${s.gpuid}" class="btn btn-warning ml-4 float-right">Update</a>
+		<a href="delete/${s.gpuid}" class="btn btn-danger ml-4 float-right">Delete</a>
+	</td>
 	
 	</tr>
 	</c:forEach>
