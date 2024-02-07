@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'psinventory'
+      MYSQL_USER: 'shavak'
+      MYSQL_PASSWORD: 'shavak'
+  web:
+    build: .
+    depends_on:
+      - db
+    container_name: psinventory
+    ports:
+      - '5555:8444'
+    expose:
+      - '5555'
+    restart: on-failure
+      
+      
+      

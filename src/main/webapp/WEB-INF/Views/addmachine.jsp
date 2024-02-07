@@ -41,18 +41,23 @@
 					  <input type="text" name="issuedOnName" value="${record.issuedOnName}" class="form-control" placeholder="Enter issued name">
 					</div>
 					<div class="mb-3">
-					  <label for="gpuCard" class="form-label">GPU Card</label>
+					  <label for="gpuCard" class="form-label">GPU Card &nbsp&nbsp&nbsp&nbsp</label>
+					  <input type="radio" name="command" value="0" onclick="test(1)"/>Yes
+					  <input type="radio" name="command" value="1" onclick="test(0)"/>No
 					  <input type="text" name="gpuCard" value="${record.gpuCard}" class="form-control" placeholder="Enter the GPU card">
 					</div>
 					<div class="mb-3">
-					  <label for="gpuCardSerialNumber" class="form-label">GPU Card Sr.No</label>
+					  <label for="gpuCardSerialNumber" class="form-label" id="123" >GPU Card Sr.No</label>
 					  <input type="text" name="gpuCardSerialNumber" value="${record.gpuCardSerialNumber}" class="form-control" placeholder="Enter the GPU card serialNumber">
 					</div>
 					<div class="mb-3">
 					  <label for="mobile" class="form-label">Mobile No</label>
 					  <input type="number" name="mobile" value="${record.mobile}" class="form-control" placeholder="Enter the mobile number">
 					</div>
-					
+					<div class="mb-3">
+					  <label for="vendorName" class="form-label">Vendor Name</label>
+					  <input type="text" name="vendorName" value="${record.vendorName}" class="form-control" placeholder="Vendor Name">
+					</div>
 					<c:if test="${record.mid != 0}">
 						<div class="mb-3">
 						  <label for="status" class="form-label">Status</label>
@@ -91,4 +96,33 @@
 	        <div class="col-3"></div>
 	</div>
 </body>
+<script type="text/javascript">
+	function test(state){
+		if(state == 0){
+			document.getElementsByName("command")[1].checked = true
+			document.getElementsByName("gpuCard")[0].style.display = "none";
+			document.getElementsByName("gpuCardSerialNumber")[0].style.display = "none";
+			
+			document.getElementsByName("gpuCard")[0].value = "";
+			document.getElementsByName("gpuCardSerialNumber")[0].value = "";
+			
+			document.getElementById("123").style.display = "none";
+		}else{
+			document.getElementsByName("command")[0].checked = true
+			document.getElementsByName("gpuCard")[0].style.display = "block";
+			document.getElementsByName("gpuCardSerialNumber")[0].style.display = "block";
+			
+			document.getElementsByName("gpuCard")[0].value = "${record.gpuCard}";
+			document.getElementsByName("gpuCardSerialNumber")[0].value = "${record.gpuCardSerialNumber}";
+			
+			document.getElementById("123").style.display = "block";
+		}
+	}
+	console.log("${record.gpuCard}")
+	if("${record.gpuCard}" != ""){
+		test(1)
+	}else{
+		test(0)
+	}
+</script>
 </html>

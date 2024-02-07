@@ -48,6 +48,9 @@ public class Machine {
 	@Column(name = "status")
 	private String status;
 	
+	@Column(name = "vendor_name")
+	private String vendorName;
+	
 	public Machine() {
 		this.status = "Available";
 	}
@@ -118,12 +121,21 @@ public class Machine {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getVendorName() {
+		return vendorName;
+	}
+
+	public void setVendorName(String vendorName) {
+		this.vendorName = vendorName;
+	}
+
 	@Override
 	public String toString() {
-		return "Machine [mid=" + mid + ", manufacturer=" + manufacturer + ", machineModel=" + machineModel + ", serialNo="
-				+ serialNo + ", issuedOnDate=" + issuedOnDate + ", issuedOnName=" + issuedOnName + ", gpuCard="
-				+ gpuCard + ", gpuCardSerialNumber=" + gpuCardSerialNumber + ", mobile=" + mobile + ", comment="
-				+ comment + ", status=" + status + "]";
+		return "Machine [mid=" + mid + ", manufacturer=" + manufacturer + ", machineModel=" + machineModel
+				+ ", serialNo=" + serialNo + ", issuedOnDate=" + issuedOnDate + ", issuedOnName=" + issuedOnName
+				+ ", gpuCard=" + gpuCard + ", gpuCardSerialNumber=" + gpuCardSerialNumber + ", mobile=" + mobile
+				+ ", comment=" + comment + ", status=" + status + ", vendorName=" + vendorName + "]";
 	}
 	
 }
