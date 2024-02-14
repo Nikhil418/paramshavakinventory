@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: test
+  labels:
+    app: iv
+data:
+  MYSQL_DATABASE: "psinventory"
+  MYSQL_USER: shavak

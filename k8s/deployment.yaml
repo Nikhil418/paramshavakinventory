@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ivdeployment
+  namespace: test
+  labels:
+    app: iv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iv
+  template:
+    metadata:
+      labels:
+        app: iv
+    spec:
+      containers:
+        - name: ivcon
+          image: nikhil1997/inventory
+          ports:
+            - containerPort: 8585
+        - name: mysql
+          image: mysql:8
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: MYSQL_ROOT_PASSWORD             #echo -n "$PASSWORD" | base64
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_DATABASE
+          ports:
+            - containerPort: 3306
+

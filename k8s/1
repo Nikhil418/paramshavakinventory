@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+  namespace: test
+  labels:
+    app: iv
+type: Opaque
+data:
+  MYSQL_USER: "shavak"
+  MYSQL_PASSWORD: ""
+  MYSQL_ROOT_PASSWORD: "cm9vdAo="
